@@ -7,12 +7,14 @@
 
 INstall this - https://istio.io/latest/docs/tasks/traffic-management/request-routing/
 
+Traffic Shifting - https://istio.io/latest/docs/tasks/traffic-management/traffic-shifting/
+
+As a security best practice, it is recommended to deploy the gateway in a different namespace from the control plane.
 
 
+In this task you migrated traffic from an old to new version of the reviews service using Istio’s weighted routing feature. Note that this is very different than doing version migration using the deployment features of container orchestration platforms, which use instance scaling to manage the traffic.
 
-
-
-
+With Istio, you can allow the two versions of the reviews service to scale up and down independently, without affecting the traffic distribution between them.
 
 
 
