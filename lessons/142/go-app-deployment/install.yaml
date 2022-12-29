@@ -38,6 +38,7 @@ spec:
       labels:
         app: details
         version: v1
+        istio: monitor
     spec:
       serviceAccountName: bookinfo-details
       containers:
@@ -91,6 +92,7 @@ spec:
       labels:
         app: ratings
         version: v1
+        istio: monitor
     spec:
       serviceAccountName: bookinfo-ratings
       containers:
@@ -144,6 +146,7 @@ spec:
       labels:
         app: reviews
         version: v1
+        istio: monitor
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -186,6 +189,7 @@ spec:
       labels:
         app: reviews
         version: v2
+        istio: monitor
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -228,6 +232,7 @@ spec:
       labels:
         app: reviews
         version: v3
+        istio: monitor
     spec:
       serviceAccountName: bookinfo-reviews
       containers:
@@ -294,6 +299,7 @@ spec:
       labels:
         app: productpage
         version: v1
+        istio: monitor
     spec:
       serviceAccountName: bookinfo-productpage
       containers:
