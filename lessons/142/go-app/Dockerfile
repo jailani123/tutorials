@@ -9,10 +9,10 @@ RUN go mod download && go mod verify
 
 COPY cmd/main.go ./cmd/main.go
 
-RUN go build -o /app cmd/main.go
+RUN go build -o /myapp cmd/main.go
 
 FROM gcr.io/distroless/base-debian11
 
-COPY --from=build /app /app
+COPY --from=build /myapp /myapp
 
-ENTRYPOINT ["/app"]
+ENTRYPOINT ["/myapp"]
