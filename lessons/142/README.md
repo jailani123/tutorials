@@ -87,3 +87,6 @@ hey -n 100000000 -c 1 -q 10 http://localhost:8080/api/devices
 
 ## Deployed
 terraform apply
+./deploy.sh
+./deploy_app.sh
+./canary.sh
