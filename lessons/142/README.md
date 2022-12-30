@@ -16,7 +16,8 @@ In this task you migrated traffic from an old to new version of the reviews serv
 
 With Istio, you can allow the two versions of the reviews service to scale up and down independently, without affecting the traffic distribution between them.
 
-
+By default, Istio tracks the server workloads migrated to Istio proxies, and configures client proxies to send mutual TLS traffic to those workloads automatically, and to send plain text traffic to workloads without sidecars.
+https://istio.io/latest/docs/tasks/security/authentication/authn-policy/#auto-mutual-tls
 
 
 
