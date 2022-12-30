@@ -68,6 +68,11 @@ export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
 
 
 
+kubectl -n monitoring port-forward svc/prometheus-operated 9090
 
+kubectl -n staging port-forward svc/service-a 8080
+kubectl -n istio-system port-forward svc/kiali 20001
 
-  kubectl -n staging port-forward svc/service-a 8080
+kubectl get httproute service-b -o yaml
+
+hey -n 100000000 -c 1 -q 10 http://localhost:8080/api/devices
