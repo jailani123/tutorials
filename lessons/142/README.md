@@ -89,4 +89,33 @@ hey -n 100000000 -c 1 -q 10 http://localhost:8080/api/devices
 terraform apply
 ./deploy.sh
 ./deploy_app.sh
-./canary.sh
+
+kubectl get pods -n staging
+kubectl get svc -n staging
+kubectl -n staging port-forward svc/service-a 8080
+curl localhost:8080/api/devices
+kubectl apply -f go-app/deploy/7-service-b-v1.yaml
+kubectl apply -f go-app/deploy/8-service-b-v2.yaml
+kubectl get svc -n staging
+kubectl get endpoints -n staging
+kubectl apply -f go-app/deploy/9-route.yaml
+kubectl get httproute service-b -n staging -o yaml
+curl localhost:8080/api/devices
+hey -n 100000000 -c 1 -q 10 http://localhost:8080/api/devices
+kubectl -n istio-system port-forward svc/kiali 20001
+
+
+
+add
+```yaml
+      weight: 90
+    - name: service-b-v2
+      port: 8080
+      weight: 10
+```
+
+kubectl apply -f go-app/deploy/9-route.yaml
+
+
+
+hey -n 100000000 -c 1 -q 10 http://localhost:8080/api/devices
