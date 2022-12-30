@@ -24,6 +24,15 @@ https://istio.io/latest/docs/tasks/security/authentication/authn-policy/#auto-mu
 
 
 
+
+
+
+
+
+
+
+
+
 ## Istiod
 k apply -f /Users/antonputra/devel/tutorials/lessons/142/istio-crds.yaml
 k create ns istio-system
@@ -47,3 +56,18 @@ export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
 
 
   Gateway API to configure internal mesh - https://istio.io/latest/docs/tasks/traffic-management/request-routing/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  kubectl -n staging port-forward svc/service-a 8080

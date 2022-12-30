@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -19,18 +21,15 @@ type Device struct {
 }
 
 type Response struct {
-	Message string `json:"message"`
-	Version string `json:"version"`
+	Version string   `json:"version"`
+	Devices []Device `json:"devices"`
 }
 
 func init() {
+	version = os.Getenv("VERSION")
 	service = os.Getenv("SERVICE")
 	if service == "" {
 		log.Fatalln("You MUST set SERVICE env variable!")
-	}
-	version = os.Getenv("VERSION")
-	if service == "" {
-		log.Fatalln("You MUST set VERSION env variable!")
 	}
 }
 
@@ -42,15 +41,30 @@ func main() {
 
 func getDevices(c *fiber.Ctx) error {
 	if service == "service-a" {
-		resp := Response{Message: "request was forwarded to service-b", Version: version}
+		url := "http://service-b.staging:8080/api/devices"
+		var resp Response
+
+		r, err := http.Get(url)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		defer r.Body.Close()
+
+		err = json.NewDecoder(r.Body).Decode(&resp)
+		if err != nil {
+			log.Fatalln(err)
+		}
 
 		return c.JSON(resp)
 	} else {
 		dvs := []Device{
 			{1, "5F-33-CC-1F-43-82", "2.1.6"},
-			{2, "EF-2B-C4-F5-D6-34", "2.1.6"},
+		}
+		resp := Response{
+			Devices: dvs,
+			Version: version,
 		}
 
-		return c.JSON(dvs)
+		return c.JSON(resp)
 	}
 }
