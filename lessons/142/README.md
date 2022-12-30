@@ -76,3 +76,14 @@ kubectl -n istio-system port-forward svc/kiali 20001
 kubectl get httproute service-b -o yaml
 
 hey -n 100000000 -c 1 -q 10 http://localhost:8080/api/devices
+
+
+
+
+
+
+
+
+
+## Deployed
+terraform apply
